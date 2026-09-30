@@ -1,0 +1,212 @@
+:root {
+  --bg: #0f1623;
+  --fg: #e8edf6;
+  --muted: #97a3b8;
+  --card: #182234;
+  --card-2: #1e2a40;
+  --border: #2c3a55;
+  --primary: #4f8cff;
+  --danger: #ff6b6b;
+  --danger-bg: rgba(255, 107, 107, 0.12);
+  --success: #34d399;
+  --success-bg: rgba(52, 211, 153, 0.1);
+  --warn: #fbbf24;
+  --warn-bg: rgba(251, 191, 36, 0.12);
+  --unsolvable: #c084fc;
+  --unsolvable-bg: rgba(192, 132, 240, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.topbar {
+  background: linear-gradient(135deg, #1b2a47 0%, #0f1623 100%);
+  padding: 28px 16px;
+  text-align: center;
+}
+
+.topbar h1 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.topbar .subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card-head { margin-bottom: 12px; }
+
+.card-head .hint {
+  margin-top: 4px;
+  color: #8b97ad;
+  font-size: 13px;
+}
+
+.field-label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+textarea, input[type="text"] {
+  width: 100%;
+  background: #0d1524;
+  color: #e8edf6;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 15px;
+}
+
+textarea:focus, input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.25);
+}
+
+.preview {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-x: auto;
+}
+
+.preview .row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.preview .cell {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  flex-shrink: 0;
+}
+
+.preview .cell.zero { background: #142033; color: #5e6d88; }
+.preview .cell.one  { background: #24395e; color: #bcd2ff; }
+.preview .cell.bad  { background: var(--danger-bg); border-color: var(--danger); color: var(--danger); }
+.preview .cell.sel  { background: var(--success-bg); border-color: var(--success); color: var(--success); }
+
+.actions {
+  display: flex;
+  margin-top: 16px;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+button {
+  border: 1px solid var(--border);
+  background: var(--card-2);
+  color: #e8edf6;
+  border-radius: 8px;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover { border-color: #465a80; }
+
+button.primary {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+button.primary:hover { background: #407bee; }
+button.ghost { color: var(--muted); }
+
+.spacer { flex: 1; }
+
+.draft-error {
+  margin-top: 14px;
+  color: var(--danger);
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+.draft-error .err-line { display: block; margin-top: 4px; }
+
+.result { min-height: 120px; }
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid;
+}
+
+.badge.solvable { background: var(--success-bg); color: var(--success); border-color: var(--success); }
+.badge.unsolvable { background: var(--unsolvable-bg); color: var(--unsolvable); border-color: var(--unsolvable); }
+.badge.invalid { background: var(--danger-bg); color: var(--danger); border-color: var(--danger); }
+.badge.pending { background: var(--warn-bg); color: var(--warn); border-color: var(--warn); }
+
+.kv {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.kv .line {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.kv .k {
+  width: 130px;
+  color: var(--muted);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.kv .v {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.stale-note {
+  margin-top: 12px;
+  color: var(--warn);
+  font-size: 13px;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 20px;
+  font-size: 12px;
+}

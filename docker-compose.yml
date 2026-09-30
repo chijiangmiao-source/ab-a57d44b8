@@ -1,0 +1,37 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: syndrome-review:latest
+    environment:
+      # 可配置的容器内端口与监听地址（宿主机端口在下方 ports 处配置）。
+      PORT: "8080"
+      HOST: "0.0.0.0"
+    ports:
+      # 宿主机端口可通过环境变量配置：HTTP_PORT（默认 8080）。
+      - "${HTTP_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 2s
+    restart: unless-stopped
+
+  # 一次性验收服务：依次运行代码测试、构建检查与 HTTP/API 冒烟，
+  # 执行完即退出，以退出码报告结果。
+  #   查看结果：docker compose up --build verify
+  #   仅启动页面：docker compose up --build web
+  verify:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: syndrome-review:latest
+    command: ["node", "scripts/verify.mjs"]
+    depends_on:
+      web:
+        condition: service_healthy
+    environment:
+      BASE_URL: "http://web:8080"
+    restart: "no"

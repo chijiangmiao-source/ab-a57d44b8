@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>星间链路 · 综合症复核</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>星间链路校验矩阵复核</h1>
+    <p class="subtitle">精确求解 H<b>x</b> = <b>s</b> 的最小汉明重量二进制解；同重量按列号顺序比较位串（0 &lt; 1）取规范解。</p>
+  </header>
+
+  <main>
+    <section class="card" aria-labelledby="draft-title">
+      <div class="card-head">
+        <h2 id="draft-title">草稿录入</h2>
+        <div class="hint">每行一个 0/1 串，至多 32 行、40 列；字符顺序即行号 / 列号顺序（第 1 个字符为第 1 行 / 第 1 列）。</div>
+      </div>
+
+      <label class="field-label" for="matrix">校验矩阵 H（每行一行）</label>
+      <textarea id="matrix" spellcheck="false" autocomplete="off" rows="8"
+        placeholder="例如：&#10;1000&#10;0100&#10;0010&#10;0001"></textarea>
+
+      <div id="matrix-preview" class="preview" aria-hidden="false"></div>
+
+      <label class="field-label" for="syndrome">综合症 s（长度等于行数）</label>
+      <input id="syndrome" type="text" spellcheck="false" autocomplete="off" placeholder="例如：0010" />
+
+      <div class="actions">
+        <button id="btn-review" type="button" class="primary">发起复核</button>
+        <button id="btn-clear" type="button">清空草稿与结论</button>
+        <span class="spacer"></span>
+        <button id="btn-demo-identity" type="button" class="ghost">示例：4 阶单位阵</button>
+        <button id="btn-demo-twin" type="button" class="ghost">示例：两列均为 11</button>
+      </div>
+      <div id="draft-error" class="draft-error" role="alert"></div>
+    </section>
+
+    <section class="card" aria-labelledby="result-title">
+      <h2 id="result-title">复核结论</h2>
+      <div id="result" class="result">
+        <p class="muted">尚未发起复核。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>最小重量由服务端按重量折半精确搜索求得（不限制误码数、不随机尝试、不枚举 2<sup>40</sup>）。</span>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
