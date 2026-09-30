@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>星间链路 · 校验矩阵最小误码复核</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>星间链路校验复核台</h1>
+    <p class="sub">在 GF(2) 上精确求解 Hx = s 的最小汉明重量向量（最多 32 行 × 40 列）</p>
+  </header>
+
+  <main class="layout">
+    <section class="card">
+      <div class="card-head">
+        <h2>录入区</h2>
+        <div class="hint">行=校验式，元素为 0/1，可用空格或逗号分隔</div>
+      </div>
+
+      <label class="field-label" for="matrix">校验矩阵 H</label>
+      <textarea id="matrix" spellcheck="false" inputmode="numeric"
+        placeholder="例如：&#10;1 0 0 1&#10;0 1 0 1&#10;0 0 1 0"></textarea>
+      <div class="meta" id="matrixMeta">尚未录入</div>
+
+      <label class="field-label" for="syndrome">综合症 s（长度须等于矩阵行数）</label>
+      <textarea id="syndrome" class="single" spellcheck="false" inputmode="numeric"
+        placeholder="例如：1 1 0"></textarea>
+      <div class="meta" id="syndromeMeta">尚未录入</div>
+
+      <div class="actions">
+        <button id="verifyBtn" class="primary" type="button">发起复核</button>
+        <button id="clearBtn" type="button">清空草稿和结论</button>
+        <span id="busy" class="busy" hidden>复核中…</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>结论区</h2>
+        <div class="hint" id="resultTag">等待复核</div>
+      </div>
+      <div id="issues" class="issues" hidden></div>
+      <div id="result" class="result" hidden></div>
+      <div id="emptyState" class="empty">发起复核后，此处展示最小误码结论与异或证据；不可综合时不会展示任何证据。</div>
+    </section>
+  </main>
+
+  <footer class="foot">最小重量 · 同重量按列号顺序取 0 优先的规范解 · 无随机、无误码数上限</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

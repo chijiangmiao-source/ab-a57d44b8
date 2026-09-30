@@ -1,0 +1,15 @@
+{
+  "name": "interlink-parity-check",
+  "version": "1.0.0",
+  "private": true,
+  "description": "星间链路 0/1 校验矩阵最小汉明重量综合症复核系统",
+  "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/solver.test.js test/parser.test.js test/codec.test.js",
+    "verify": "node test/run-all.js"
+  }
+}
